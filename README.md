@@ -14,24 +14,19 @@ The design emphasizes:
 
 ## Current Status
 
-**v0.1.0 — foundation/bootstrap.**
+**v0.1.5 — first inventory Hand Crafting/Craft-button milestone.**
 
-The Fabric development environment has been created and manually verified by the project owner with:
+The Fabric baseline, material identity, Ground Resources/bootstrap locks, primitive knapping, and timed server-authoritative `WorkActionManager` are established. v0.1.5 now augments the inventory 2x2 grid with an explicit **Craft** button and routes recognized Hand Crafting through that existing server runtime. The first operation is Branch + persistent Flint Flake → ~5 seconds of `Shape Wooden Handle` → Wooden Handle. The client sends only a request; the server re-resolves the grid, reserves input, validates the tool capability, owns timing/cancellation, and grants the result.
 
-- development client launch,
-- dedicated development server launch,
-- client connection to the dedicated server.
-
-Gameplay systems have not yet been implemented. The next work is the Phase 0/Foundation architecture followed by the first primitive vertical slice.
-
-Start with:
-
-1. [`docs/README.md`](docs/README.md)
-2. [`docs/14_CURRENT_STATE_AND_HANDOFF.md`](docs/14_CURRENT_STATE_AND_HANDOFF.md)
-3. [`docs/15_DEVELOPMENT_WORKFLOW.md`](docs/15_DEVELOPMENT_WORKFLOW.md)
-4. [`docs/09_IMPLEMENTATION_ROADMAP.md`](docs/09_IMPLEMENTATION_ROADMAP.md)
+The next planned gameplay milestone after local v0.1.5 verification is **v0.1.6 — Fibre/Cordage Bootstrap**. Fibre will remain source-identified rather than becoming a generic naturally harvested `Plant Fibre`: Tall Grass → Long Grass Stems → Prepared Grass → Primitive Grass Cordage is the emergency route, with Nettle planned as the first better wild fibre source. See `docs/14_CURRENT_STATE_AND_HANDOFF.md`, `docs/22_FIBRES_CORDAGE_AND_TEXTILES.md`, and `docs/23_HAND_CRAFTING_UI.md`.
 
 ## Development
+
+Run data generation:
+
+```powershell
+.\gradlew.bat runDatagen
+```
 
 Run the client:
 

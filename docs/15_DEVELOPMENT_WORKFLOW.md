@@ -262,10 +262,10 @@ Use stable namespaced identifiers from the beginning.
 Conceptual examples:
 
 ```text
-primitivecivilization:stone_flake
-primitivecivilization:assemble_stone_axe
-primitivecivilization:primitive_tools
-primitivecivilization:basic_knapping
+realisticciv:stone_flake
+realisticciv:assemble_stone_axe
+realisticciv:primitive_tools
+realisticciv:basic_knapping
 ```
 
 Renaming an ID after it appears in saves/data packs can become a migration problem, so distinguish display-name changes from identifier changes.

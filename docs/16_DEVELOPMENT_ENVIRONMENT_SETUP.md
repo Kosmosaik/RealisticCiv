@@ -131,9 +131,9 @@ Data Generation: enabled
 Working identifiers may initially be:
 
 ```text
-Display name: Primitive Civilization
-Mod ID: primitivecivilization
-Package: com.primitivecivilization
+Display name: RealisticCiv
+Mod ID: realisticciv
+Package: com.realisticciv
 ```
 
 These identifiers are still provisional until the first source project is committed.

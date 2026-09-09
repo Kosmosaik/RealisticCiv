@@ -8,13 +8,17 @@ The core question is:
 
 ---
 
+## Current Audit Status — v0.1.2
+
+This checklist is intentionally broader than the current implementation. In v0.1.2, only the **first bootstrap pass** is complete: survival log breaking is gated, the first natural ground resources exist, and the obvious plank/stick/crafting-table/furnace/wooden-tool/stone-tool recipes are disabled. Checked entries below mean that specific bootstrap concern has an implemented first pass; they do **not** mean the entire surrounding category is permanently finished.
+
 ## Resource Acquisition
 
 - [ ] Bare-hand block drops audited.
-- [ ] Tree harvesting audited.
+- [x] Tree harvesting audited. — v0.1.2 first pass: survival log breaking requires `realisticciv:felling_tools`.
 - [ ] Leaf drops audited.
-- [ ] Ground-resource availability balanced.
-- [ ] Stone acquisition audited.
+- [ ] Ground-resource availability balanced. — initial v0.1.2 generation exists; balancing still pending playtest.
+- [ ] Stone acquisition audited. — initial Granite Stone / Flint Nodule surface acquisition exists; full stone/mining rules pending.
 - [ ] Ore acquisition audited.
 - [ ] Clay/sand/gravel acquisition audited.
 - [ ] Water acquisition audited.
@@ -23,9 +27,9 @@ The core question is:
 
 ## Recipes
 
-- [ ] Inventory 2×2 recipes audited.
-- [ ] Crafting-table recipes audited.
-- [ ] Furnace recipes audited.
+- [ ] Inventory 2×2 recipes audited. — first bootstrap recipes disabled; full Hand Crafting replacement pending.
+- [ ] Crafting-table recipes audited. — crafting-table bootstrap recipe disabled; full recipe audit pending.
+- [ ] Furnace recipes audited. — furnace bootstrap recipe disabled; furnace/smelting system audit pending.
 - [ ] Blast-furnace recipes audited.
 - [ ] Smoker recipes audited.
 - [ ] Stonecutter recipes audited.
@@ -37,8 +41,8 @@ The core question is:
 
 ## Tools
 
-- [ ] Wooden tools disabled/reworked.
-- [ ] Stone tools disabled/reworked.
+- [x] Wooden tools disabled/reworked. — vanilla wooden tool recipes disabled in v0.1.2.
+- [x] Stone tools disabled/reworked. — vanilla stone tool recipes disabled in v0.1.2.
 - [ ] Iron tools gated.
 - [ ] Diamond tools gated.
 - [ ] Netherite tools gated.
@@ -52,8 +56,8 @@ The core question is:
 
 ## Workstations
 
-- [ ] Crafting table.
-- [ ] Furnace.
+- [ ] Crafting table. — crafting recipe disabled; later workstation/interaction behavior still pending.
+- [ ] Furnace. — crafting recipe disabled; later workstation/interaction behavior still pending.
 - [ ] Blast furnace.
 - [ ] Smoker.
 - [ ] Stonecutter.

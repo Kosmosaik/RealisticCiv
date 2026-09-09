@@ -1,0 +1,45 @@
+{
+  "ambientocclusion": true,
+  "textures": {
+    "particle": "realisticciv:block/ground_branch",
+    "all": "realisticciv:block/ground_branch"
+  },
+  "elements": [
+    {
+      "from": [2, 0.5, 7],
+      "to": [14, 2.5, 9],
+      "rotation": {
+        "origin": [8, 1.5, 8],
+        "axis": "y",
+        "angle": 22.5,
+        "rescale": true
+      },
+      "faces": {
+        "down": { "uv": [2, 7, 14, 9], "texture": "#all" },
+        "up": { "uv": [2, 7, 14, 9], "texture": "#all" },
+        "north": { "uv": [2, 13.5, 14, 15.5], "texture": "#all" },
+        "south": { "uv": [2, 13.5, 14, 15.5], "texture": "#all" },
+        "west": { "uv": [7, 13.5, 9, 15.5], "texture": "#all" },
+        "east": { "uv": [7, 13.5, 9, 15.5], "texture": "#all" }
+      }
+    },
+    {
+      "from": [10, 0.75, 7.4],
+      "to": [15, 2.15, 8.8],
+      "rotation": {
+        "origin": [10.5, 1.4, 8],
+        "axis": "y",
+        "angle": -45,
+        "rescale": true
+      },
+      "faces": {
+        "down": { "uv": [2, 7, 14, 9], "texture": "#all" },
+        "up": { "uv": [2, 7, 14, 9], "texture": "#all" },
+        "north": { "uv": [3, 13.5, 13, 15.5], "texture": "#all" },
+        "south": { "uv": [3, 13.5, 13, 15.5], "texture": "#all" },
+        "west": { "uv": [7, 13.5, 9, 15.5], "texture": "#all" },
+        "east": { "uv": [7, 13.5, 9, 15.5], "texture": "#all" }
+      }
+    }
+  ]
+}

@@ -17,6 +17,28 @@ It should answer:
 
 ---
 
+## Implementation Status — v0.1.5
+
+The vertical slice is now partially implemented:
+
+- ✅ `Branch`, `Granite Stone`, and `Flint Nodule` have real material/item identities.
+- ✅ A reusable small ground-resource pickup block exists.
+- ✅ The three bootstrap resources have an initial natural worldgen pass for new chunks.
+- ✅ Pickup is server-authoritative.
+- ✅ Survival log breaking is blocked until a legitimate RealisticCiv felling tool is introduced.
+- ✅ The first vanilla plank/stick/crafting-table/furnace/wooden-tool/stone-tool recipe bypasses are disabled.
+- ⏳ Fibre resources are not implemented yet. The planned bootstrap is Tall Grass → Long Grass Stems → Prepared Grass → Primitive Grass Cordage, with Nettle as the first better wild route; there is deliberately no generic naturally harvested `Plant Fibre` item.
+- ✅ Initial knapping is implemented: Granite Stone + Flint Nodule -> Flint Core + Flint Flakes + Flint Chips, backed by the operation-definition/catalog layer.
+- ✅ The first generic timed `WorkActionManager` is implemented: ~4-second server-owned knapping, held-input reservation, Ground Resource reservation, stationary cancellation, action-bar progress, arm swings, sounds, particles, and server-only completion.
+- ✅ Flint Flake is tagged as the first primitive cutting edge.
+- ✅ v0.1.5 adds the 2x2 Hand Crafting Craft-button flow and the first timed `Shape Wooden Handle` operation (Branch + persistent Flint Flake → Wooden Handle).
+- ⏳ Further knapping/retouching, fibre/cordage, primitive axe head/assembly, and the first legitimate felling tool are not implemented yet.
+- ⏳ The broader vanilla bypass audit remains ongoing.
+
+See `19_GROUND_RESOURCES_AND_BOOTSTRAP_LOCKS.md`, `20_PRIMITIVE_KNAPPING.md`, and `21_WORK_ACTION_FOUNDATION.md`.
+
+---
+
 ## Scope
 
 ### Vanilla Changes
@@ -31,13 +53,17 @@ It should answer:
 
 ### World Resources
 
-Add:
+Add/extend:
 
-- Twig,
 - Branch,
-- Loose Stone,
-- Knappable Stone,
-- Dry Grass / Fibre Plant.
+- Granite Stone,
+- Flint Nodule,
+- Tall Grass-derived Long Grass Stems,
+- later wild Nettle as a better fibre source.
+
+Do not add a generic naturally harvested `Plant Fibre` item. Twig remains optional future ground litter rather than a requirement for the first slice.
+
+`Granite Stone` and `Flint Nodule` are actual material identities, not aliases for generic `Loose Stone` / `Tool Stone` inventory items. Broad tags/capabilities classify them for operations. See `18_MATERIAL_IDENTITY_AND_PROPERTIES.md`.
 
 These spawn naturally in appropriate environments.
 
@@ -45,10 +71,11 @@ These spawn naturally in appropriate environments.
 
 Add:
 
-- Stone Flake,
-- Prepared Fibre,
-- Cordage,
-- Suitable Haft,
+- Flint Flake,
+- Long Grass Stems,
+- Prepared Grass,
+- Primitive Grass Cordage,
+- Wooden Handle (implemented in v0.1.5),
 - Primitive Axe Head.
 
 ### Primitive Tools
@@ -97,21 +124,21 @@ Search surroundings
 ↓
 Pick up branch
 ↓
-Pick up loose stone
+Pick up Granite Stone / another suitable hammerstone
 ↓
-Find knappable stone
+Find Flint Nodule / another sufficiently knappable material
 ↓
 Use hammerstone to create stone flake
 ↓
-Gather fibre
+Harvest Tall Grass / obtain a viable fibre source
 ↓
-Prepare fibre
+Prepare fibre source
 ↓
-Make cordage
+Make primitive cordage
 ↓
-Create primitive cutting tool
+Use Flint Flake as primitive cutting edge
 ↓
-Process branch into suitable haft
+Hand Craft Branch + Flint Flake into Wooden Handle ✓
 ↓
 Create stone axe head
 ↓

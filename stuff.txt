@@ -1,1 +1,25 @@
 python .\tools\package_source.py
+
+
+Let's continue. Use the latest zip you sent to me, and update the changelog and (if needed) the docs so they're up to date
+
+
+.\gradlew.bat runDatagen
+.\gradlew.bat build
+.\gradlew.bat runClient
+
+
+
+TODO
+
+# Hands only in the beginning. Set max amount of items depending on item. Bundle size + Weight.
+
+# Client stops responding when quitting (both X button and Save & Quit button)
+
+# What is runDatagen and build, and do I need to run those commands after every change/zip you send me?
+
+# Breaking the Resources (punching), the particle effects is placeholder/prototype textures. The checkerboard texture.
+
+# Improve knapping by - instead of giving all items at once when the process is finished - tossing/throwing flakes/chips on the ground during the process. Only give the core in the hand when the process is done.
+
+# randomise amount of flakes/chips.

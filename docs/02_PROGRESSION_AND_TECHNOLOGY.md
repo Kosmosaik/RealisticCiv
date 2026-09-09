@@ -67,7 +67,7 @@ These are organizational categories, not hard progression gates.
 ### Era 1 — Primitive Toolmaking
 
 - hammerstones,
-- knappable stone,
+- identified knappable materials (flint, later chert/quartzite/obsidian etc.),
 - flakes,
 - primitive knives,
 - cordage,

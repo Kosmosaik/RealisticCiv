@@ -2,6 +2,8 @@
 
 ## Goal
 
+**Implementation note (v0.1.5):** `OperationDefinition` / `OperationCatalog` execute through the generic server-authoritative `WorkActionManager`, and the inventory 2x2 grid now has the first explicit Hand Crafting `Craft` button. The first Hand Crafting operation is Branch + persistent Flint Flake → timed `Shape Wooden Handle`. The client only requests crafting; the server resolves the real grid, reserves input, validates the tool capability, closes the inventory, advances work, and owns output. Skills, quality, failures, richer multi-input reservations, custom animations, and batch crafting remain future work. See `20_PRIMITIVE_KNAPPING.md`, `21_WORK_ACTION_FOUNDATION.md`, and `23_HAND_CRAFTING_UI.md`.
+
 Replace Minecraft's primarily instant ingredient-grid crafting model with a system that represents **materials, operations, tools, workplaces, skills, knowledge, time, risk, waste, quality, and production state**.
 
 The design should remain understandable and playable rather than attempting a literal simulation of every physical action.
@@ -131,7 +133,7 @@ Primitive Toolmaking
 
 Inputs:
 - Stone Axe Head
-- Wooden Haft
+- Wooden Handle
 - Cordage
 
 Required Tools:
