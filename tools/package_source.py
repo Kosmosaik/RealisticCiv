@@ -1,4 +1,3 @@
-\
 #!/usr/bin/env python3
 """Create a clean source ZIP for RealisticCiv development handoffs.
 

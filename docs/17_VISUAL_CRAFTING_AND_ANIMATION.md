@@ -8,6 +8,8 @@ The underlying simulation remains server-authoritative through `WorkAction`. Vis
 
 The system must work even when no custom animation exists yet; visual fidelity should be incremental rather than a prerequisite for adding content.
 
+**Implementation note (v0.1.5):** primitive knapping remains the first proof of layered work presentation, and Hand Crafting now proves the same WorkAction can select category-specific visual feedback. `Shape Wooden Handle` uses repeated vanilla arm swings, wood sounds, and Branch-derived particles while the server owns the action. These remain bootstrap visuals that can later be replaced by dedicated carving/whittling animations and visible workpieces without changing operation execution.
+
 ---
 
 ## Core Principle
@@ -77,7 +79,7 @@ Candidate early uses:
 Example knapping flow:
 
 ```text
-place knappable stone
+place Flint Nodule / another valid knappable material
       ↓
 place/use hammerstone
       ↓

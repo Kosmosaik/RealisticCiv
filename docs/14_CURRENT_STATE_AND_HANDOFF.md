@@ -12,49 +12,104 @@ Do not infer implementation progress from the size of the design documentation.
 
 # Current Project State
 
-**Status:** Fabric project bootstrapped; foundation implementation is ready to begin.
+**Status:** v0.1.5 Hotfix 4 is the current source. Hotfix 3 compiled locally but crashed when opening the inventory because the new client accessor mixin was not registered; Hotfix 4 registers it and is pending local runtime verification.
 
 At the time of this handoff:
 
-- a Fabric 26.2 / Java 25 source project exists,
-- the development client has been manually verified to launch,
-- the dedicated development server has been manually verified to launch,
-- the development client has been manually verified to join that server,
-- local development may use `online-mode=false` in `run/server.properties` solely to allow the unauthenticated Loom dev client to connect; this file is local and excluded from source packages,
-- no actual gameplay systems are implemented yet,
-- the project currently contains only the cleaned Fabric baseline, architecture folders, documentation, and packaging tooling,
-- the package/mod ID is currently `realisticciv` / `com.realisticciv`,
-- the core design direction is substantially established,
-- the next step is Phase 0 architecture followed by the primitive vertical slice.
+- a Fabric 26.2 / Java 25 source project exists and the baseline client/server environment was previously verified by the owner,
+- v0.1.1 material identity and v0.1.2 Ground Resource/bootstrap-lock behavior were manually playtested successfully, including the Ground Resource renderer and 32x32 Branch texture,
+- natural Branch, Granite Stone, and Flint Nodule Ground Resources spawn and can be picked up server-authoritatively,
+- the first vanilla bootstrap pass remains active: survival log breaking requires `realisticciv:felling_tools`, and vanilla planks/sticks/crafting table/furnace/wooden-tool/stone-tool recipes are disabled,
+- v0.1.3 primitive knapping was manually verified: Granite Stone + Flint Nodule produces Flint Core/Flakes/Chips through a real operation definition,
+- v0.1.4 established the timed server-authoritative `WorkActionManager`: reservations, stationary cancellation, action-bar progress, repeated arm swings, sounds/particles, Ground Resource participation, and server-only output resolution,
+- **v0.1.5 adds the first inventory 2x2 Hand Crafting front end with an explicit Craft button**, using Fabric's screen API rather than replacing the entire vanilla inventory screen,
+- the Craft button is enabled only when the current 2x2 grid matches a known `HAND_CRAFTING` operation and shows the recognized operation/base time in its tooltip,
+- pressing Craft sends only an empty `StartHandCraftPayload`; the server re-reads and validates the player's real inventory menu rather than trusting client recipe/result data,
+- the first Hand Crafting operation is `realisticciv:shape_wooden_haft`: one Branch + a persistent Flint Flake cutting edge → ~5 seconds of work → one Wooden Handle,
+- the v0.1.5 Hotfix 2 client UI now anchors the Craft button to the actual shifted inventory window and renders the primary Hand Crafting result in the vanilla output slot as a visual preview,
+- v0.1.5 Hotfix 4 registers the `AbstractContainerScreenAccessor` client mixin in `fabric.mod.json`; this is required for the shifted-inventory positioning code to safely read vanilla `leftPos` / `topPos` at runtime,
+- v0.1.5 Hotfix 3 ports that output-preview rendering to the actual Minecraft/Fabric 26.2 extraction API (`GuiGraphicsExtractor` + `ScreenEvents.afterForeground`) after Hotfix 2 was found to use obsolete GUI symbols and failed `compileClientJava`,
+- `realisticciv:wooden_haft` and `realisticciv:tool_hafts` now exist for future primitive-tool assembly,
+- the player-facing item/operation names are now **Wooden Handle** / **Shape Wooden Handle**, while the underlying registry/operation IDs intentionally remain `realisticciv:wooden_haft` / `realisticciv:shape_wooden_haft` for compatibility,
+- Hand Crafting reserves the consumed Branch, closes the inventory after server acceptance, returns the persistent cutting tool to normal inventory, and revalidates that cutting-edge capability throughout the work action,
+- movement or loss of the required cutting edge cancels Hand Crafting and restores the reserved Branch,
+- WorkAction presentation is now category-aware: knapping retains stone/flint feedback while Hand Crafting uses arm swings, wood-oriented sounds, Branch-derived particles, and the same action-bar progress lifecycle,
+- v0.1.5 Hotfix 1 fixes the first compile pass by restoring the omitted `showStarted` / `showProgress` / `operationName` helpers and adapting Hand Crafting `ItemParticleOption` creation to Minecraft 26.2's supported `Item` constructor; gameplay design is unchanged,
+- the bootstrap Hand Crafting resolver currently supports exactly one consumed input + one persistent tool with exactly two occupied 2x2 slots; richer/multi-input recipes remain future work,
+- **fibre planning has been clarified before implementation:** there will be no generic naturally harvested `Plant Fibre` item; Tall Grass is the emergency source (Long Grass Stems → Prepared Grass → Primitive Grass Cordage), Nettle is the preferred first better wild fibre route, and later bast/flax/hemp retain source material identity,
+- custom graphical work HUD, custom skeletal work animations, visible placed workpieces, skills, quality, failure/waste, fibre/cordage content, and the first legitimate primitive axe are not implemented yet,
+- the custom RealisticCiv Quest Book remains the chosen long-term direction but is not implemented yet,
+- local development may use `online-mode=false` only in the excluded dev `run/server.properties`; public/friend testing remains compatible with normal `online-mode=true`,
+- open owner notes from `stuff.txt` remain relevant: investigate the client occasionally hanging on quit, fix placeholder/checkerboard Ground Resource break particles later, and revisit hand-carry/weight/bundle limits as a future inventory/logistics system,
+- the newest complete source ZIP/repository is the primary implementation source of truth.
 
-From this point onward, the **newest complete source ZIP/repository is the primary implementation source of truth**, with the documentation traveling inside it.
+See `21_WORK_ACTION_FOUNDATION.md`, `22_FIBRES_CORDAGE_AND_TEXTILES.md`, and `23_HAND_CRAFTING_UI.md`.
 
 ---
 
 # Immediate Next Action
 
-The clean Minecraft Java Fabric project described in `16_DEVELOPMENT_ENVIRONMENT_SETUP.md` has now been created and its basic client/server workflow verified.
+Verify v0.1.5 locally from the project root:
 
-Next implement **Phase 0 — Project Foundation** from `09_IMPLEMENTATION_ROADMAP.md`.
+```powershell
+.\gradlew.bat runDatagen
+.\gradlew.bat build
+.\gradlew.bat runClient
+```
 
-Do **not** begin by creating large content libraries, settlers, metallurgy, or a full quest tree.
+Verify at minimum:
 
-The first playable target remains:
+1. previous timed Flint knapping still works unchanged,
+2. the player inventory shows a **Craft** button beside the 2x2 crafting grid,
+3. the button remains disabled for invalid/empty combinations,
+4. putting one Branch + one Flint Flake in any two 2x2 slots enables the button,
+5. its tooltip identifies **Shape Wooden Handle**, ~5.0 seconds, consumed input, and retained tool,
+6. pressing Craft causes the server to accept the request and close the inventory,
+7. one Branch is reserved/removed while the Flint Flake is retained,
+8. shaping takes ~5 seconds with action-bar progress, arm swings, wood sounds, and small Branch-derived particles,
+9. exactly one Wooden Handle is produced on success,
+10. moving during shaping cancels it and restores the Branch,
+11. dropping/removing the required Flint Flake during shaping cancels and restores the Branch,
+12. invalid 2x2 arrangements never grant an output,
+13. existing Ground Resources/bootstrap locks still work.
+
+Then verify the same Hand Crafting flow on the dedicated dev server:
+
+```powershell
+.\gradlew.bat runServer
+```
+
+If v0.1.5 passes, commit it to `develop` and proceed to **v0.1.6 — Fibre/Cordage Bootstrap**. The first intended route is:
+
+```text
+Tall Grass
+→ Long Grass Stems
+→ Prepared Grass
+→ Primitive Grass Cordage
+```
+
+A better wild-fibre route (preferably Nettle Stalk → Nettle Fibre → Nettle Cordage) should follow soon after. Do **not** introduce a generic naturally harvested `Plant Fibre` item. See `22_FIBRES_CORDAGE_AND_TEXTILES.md`.
+
+The overall first playable target remains:
 
 ```text
 Spawn with no practical technology
         ↓
-Gather branches / stones / fibre from the world
+Gather branches / material-identified stones
         ↓
-Knapping
+Initial knapping ✓
         ↓
-Stone flake / cutting edge
+Flint Flake / cutting edge ✓
+        ↓
+Timed WorkAction knapping ✓
+        ↓
+2x2 Hand Crafting / Craft button ✓
+        ↓
+Wooden Handle shaping ✓
+        ↓
+Grass / better fibre processing
         ↓
 Cordage
-        ↓
-Haft components
-        ↓
-Timed Hand Crafting
         ↓
 Primitive stone axe
         ↓
@@ -79,6 +134,27 @@ These decisions are considered part of the project identity. Do not casually red
 - Vanilla instant log-to-plank, plank-to-stick, wooden-tool, stone-tool, crafting-table, furnace, loot, trade, and structure shortcuts must be audited and gated/replaced where necessary.
 - Progression should model real dependencies between materials, tools, processes, infrastructure, skills, and knowledge.
 - Historical eras are broad descriptors, not one linear global unlock number.
+
+## Fibres and Cordage
+
+- `Plant Fibre` is not a naturally harvested universal resource.
+- Fibre must be processed from identifiable source material.
+- Tall grass is the emergency/low-grade bootstrap fibre source.
+- Nettle is the preferred first better wild fibre source.
+- Bast/inner bark, flax, and hemp are planned later alternatives/progression.
+- Different cordage sources should retain material identity and can eventually qualify differently for operations based on strength/flexibility/durability properties.
+- Do not add extra processing-stage items unless they create meaningful gameplay decisions.
+
+## Materials and Resource Identity
+
+- Material identity begins immediately; do not use a generic `Tool Stone` inventory item.
+- `Granite Stone` and `Flint Nodule` are the first concrete stone resources.
+- Granite is the bootstrap hammerstone/general hard stone; flint is the bootstrap high-quality knappable stone.
+- Broad tags (`loose_stones`, `hammerstones`, `knappable_stones`) classify real materials without replacing their identity.
+- Operations should increasingly query material traits/properties/capabilities rather than hardcode one exact accepted item when multiple materials could realistically work.
+- The exact long-term JSON/material-property schema remains provisional, but callers should be designed so the bootstrap `MaterialCatalog` can later be replaced/expanded without rewriting every operation.
+
+See `18_MATERIAL_IDENTITY_AND_PROPERTIES.md`.
 
 ## Crafting and Work
 
@@ -124,6 +200,7 @@ These decisions are considered part of the project identity. Do not casually red
 ## Quest Book
 
 - The Quest Book exists to answer **"Where can I go next and why am I blocked?"**
+- The core Quest Book is implemented by RealisticCiv itself; FTB Quests/other quest frameworks are not required dependencies.
 - It should feel like a classic expert-modpack quest graph.
 - Chapters are subject/domain oriented and may span multiple historical eras.
 - Players may focus on any available/unlocked chapter and progress until a real cross-chapter dependency blocks them.
@@ -199,9 +276,10 @@ A new implementation session should proceed in this order:
 7. Create/import clean Fabric project.
 8. Confirm client launch.
 9. Confirm dedicated-server launch.
-10. Establish package/module/data-validation foundation.
-11. Create baseline build/test workflow.
-12. Only then begin Phase 1 gameplay changes.
+10. Establish package/module/data-validation foundation. **Done in bootstrap/v0.1.1.**
+11. Register first material-identity content and datagen. **Done in v0.1.1; local verification pending.**
+12. Run datagen/build/client/server verification.
+13. Only then begin Phase 1 gameplay changes.
 ```
 
 Before implementing any system, read the directly related design document rather than relying on a summary from this file.

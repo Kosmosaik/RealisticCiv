@@ -1,0 +1,45 @@
+{
+  "ambientocclusion": true,
+  "textures": {
+    "particle": "realisticciv:block/ground_flint_nodule",
+    "all": "realisticciv:block/ground_flint_nodule"
+  },
+  "elements": [
+    {
+      "from": [4, 0, 4],
+      "to": [12, 2.5, 12],
+      "rotation": {
+        "origin": [8, 1.25, 8],
+        "axis": "y",
+        "angle": -22.5,
+        "rescale": true
+      },
+      "faces": {
+        "down": { "texture": "#all" },
+        "up": { "texture": "#all" },
+        "north": { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west": { "texture": "#all" },
+        "east": { "texture": "#all" }
+      }
+    },
+    {
+      "from": [5.25, 2.25, 5],
+      "to": [11.25, 3.75, 11],
+      "rotation": {
+        "origin": [8, 3, 8],
+        "axis": "y",
+        "angle": 22.5,
+        "rescale": true
+      },
+      "faces": {
+        "down": { "texture": "#all" },
+        "up": { "texture": "#all" },
+        "north": { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west": { "texture": "#all" },
+        "east": { "texture": "#all" }
+      }
+    }
+  ]
+}

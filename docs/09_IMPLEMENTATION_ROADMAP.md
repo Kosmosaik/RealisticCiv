@@ -12,6 +12,8 @@ Do not start by adding hundreds of recipes.
 
 # Phase 0 — Project Foundation
 
+**Current status (v0.1.5):** project/bootstrap, material identity, the first vanilla-lock pass, Ground Resources, primitive knapping, reusable operation definitions, timed server-authoritative `WorkAction`, and the first inventory 2x2 Hand Crafting/Craft-button flow are implemented. The first Hand Crafting operation shapes a Wooden Handle from a Branch using a persistent Flint Flake. Local owner verification is required before moving into the fibre/cordage gameplay slice.
+
 ## Goals
 
 - verify current official Minecraft/Fabric/Java compatibility,
@@ -34,6 +36,8 @@ The clean mod project builds and launches on both client and dedicated server wi
 
 # Phase 1 — Break the Vanilla Bootstrap
 
+**Implementation status:** first pass implemented in v0.1.2 (logs, planks, sticks, crafting table, furnace recipe, vanilla wooden/stone tools). The full vanilla bypass audit remains ongoing.
+
 ## Goals
 
 - prevent bare-hand log harvesting,
@@ -51,15 +55,19 @@ A new world can no longer reach normal Minecraft progression through the first f
 
 # Phase 2 — Ground Resource System
 
+**Implementation status:** core generic pickup block + initial Branch / Granite Stone / Flint Nodule worldgen implemented in v0.1.2. Twigs, fibre resources, regeneration strategy, and final geological distribution remain future work.
+
 ## Goals
 
 Add naturally distributed collectible resources:
 
 - branches,
 - twigs,
-- loose stones,
-- tool stone,
-- dry grass/fibre.
+- material-specific loose stones (initially Granite Stone and Flint Nodule),
+- Tall Grass → Long Grass Stems → Prepared Grass → Primitive Grass Cordage as the emergency bootstrap fibre route,
+- better wild fibre such as Nettle Stalk → Nettle Fibre → Nettle Cordage,
+- later bast/inner-bark fibre and agricultural flax/hemp routes,
+- **no generic naturally harvested `Plant Fibre` item**; fibre remains a processed material with source identity.
 
 Systems:
 
@@ -76,10 +84,12 @@ Player can explore and collect the raw materials necessary for primitive surviva
 
 # Phase 3 — Primitive Toolmaking
 
+**Implementation status (v0.1.5):** hammerstone/knappable capabilities, initial timed Flint knapping, the operation/WorkAction layers, and the 2x2 Hand Crafting Craft-button flow are implemented. `Shape Wooden Handle` proves a non-knapping Hand Crafting operation with Branch input, persistent Flint Flake tool capability, timed work, cancellation, and server-only output. Fibre/cordage, primitive axe assembly, skills/waste/quality hooks, richer recipes, and custom animation remain pending.
+
 ## Goals
 
-- hammerstone,
-- knappable stone,
+- hammerstone capability (initially Granite Stone),
+- knappable material capability (initially Flint Nodule),
 - stone flakes,
 - primitive cutting tool,
 - prepared fibre,

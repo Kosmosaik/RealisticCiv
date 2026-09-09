@@ -40,6 +40,24 @@ They may be represented as:
 
 ---
 
+## Implementation Status — v0.1.2
+
+A reusable `GroundResourceBlock` system now exists for the first three loose resources:
+
+- Branch,
+- Granite Stone,
+- Flint Nodule.
+
+They appear as small non-colliding world objects and are collected through server-authoritative right-click pickup. Their current JSON-defined surface distribution is intentionally simple: branches favor forest biomes, Granite Stones use broad exposed Overworld surfaces, and Flint Nodules are rarer and restricted to gravel/sand-like support surfaces.
+
+This is a bootstrap implementation, not the final geology/ecology model. See `19_GROUND_RESOURCES_AND_BOOTSTRAP_LOCKS.md`.
+
+
+
+### Fibre Resource Clarification
+
+`fibre resources` in this document means **real source vegetation/materials**, not a generic `Plant Fibre` ground pickup. The planned emergency route starts from Tall Grass and produces Long Grass Stems, then Prepared Grass, then Primitive Grass Cordage. Nettle is the preferred first better wild source; suitable inner bark/bast and cultivated flax/hemp are later alternatives. See `22_FIBRES_CORDAGE_AND_TEXTILES.md`.
+
 ## Biome/Environment Distribution
 
 ### Forests
@@ -91,28 +109,27 @@ Potential:
 
 ---
 
-## Stone Selection
+## Stone Selection and Material Identity
 
-Not every stone should automatically create a sharp tool.
+Not every stone should automatically create a sharp tool, and RealisticCiv should **not** introduce a generic item named `Tool Stone`.
 
-Potential categories:
+Stone resources have material identity from the beginning. The first bootstrap materials are:
 
-- generic stone,
-- hammerstone,
-- knappable stone,
-- high-quality tool stone.
+- **Granite Stone** — common loose stone; suitable as a hammerstone/general-purpose hard stone, but poor for making sharp flakes.
+- **Flint Nodule** — high-quality knappable stone suitable for flakes and later knapped tool heads.
 
-Possible later geology:
+Future materials may include:
 
-- flint,
 - chert,
 - obsidian,
 - quartzite,
 - basalt,
-- granite,
-- limestone.
+- limestone,
+- additional regional/geological stone types.
 
-Early versions can use simplified categories first.
+Operations should ask for capabilities/properties such as `HAMMERSTONE`, `KNAPPABLE`, edge quality, toughness, or minimum knappability rather than requiring one artificial all-purpose stone item. Broad tags such as `loose_stones` are categories; they do not erase the underlying material identity.
+
+See `18_MATERIAL_IDENTITY_AND_PROPERTIES.md`.
 
 ---
 
@@ -121,8 +138,8 @@ Early versions can use simplified categories first.
 Initial process:
 
 ```text
-Knappable Stone
-+ Hammerstone
+Knappable Material (e.g. Flint Nodule)
++ Hammerstone (e.g. Granite Stone)
 → Stone Flake
 ```
 
@@ -309,7 +326,7 @@ Locate water
 ↓
 Collect branches / grass / stones
 ↓
-Find suitable tool stone
+Find a suitable knappable material (initially Flint Nodule)
 ↓
 Make first stone flake
 ↓

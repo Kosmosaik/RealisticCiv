@@ -1,4 +1,4 @@
-# Primitive Civilization — Minecraft Java Total Conversion
+# RealisticCiv — Minecraft Java Total Conversion
 
 ## Project Documentation Index
 
@@ -39,7 +39,15 @@ The mod is intended to preserve Minecraft's strengths — procedural voxel world
 14. [14_CURRENT_STATE_AND_HANDOFF.md](14_CURRENT_STATE_AND_HANDOFF.md) — current implementation status, locked decisions, open questions, immediate next action, and cold-handoff instructions.
 15. [15_DEVELOPMENT_WORKFLOW.md](15_DEVELOPMENT_WORKFLOW.md) — source-of-truth rules, audit-first development, multiplayer validation, testing, versioning, documentation, and GPT-assisted workflow.
 16. [16_DEVELOPMENT_ENVIRONMENT_SETUP.md](16_DEVELOPMENT_ENVIRONMENT_SETUP.md) — Windows/Fabric development environment, provisional toolchain baseline, bootstrap procedure, client/server validation, and upgrade policy.
-17. [references/README.md](references/README.md) — Quest Book structural reference and generated early/mid-game UI concepts.
+17. [17_VISUAL_CRAFTING_AND_ANIMATION.md](17_VISUAL_CRAFTING_AND_ANIMATION.md) — visible workpieces, reusable animation families, ground worksites, workstations, machines, and synchronized work visuals.
+18. [18_MATERIAL_IDENTITY_AND_PROPERTIES.md](18_MATERIAL_IDENTITY_AND_PROPERTIES.md) — material-first resource identity, stone traits/properties, capability tags, and the no-generic-Tool-Stone decision.
+19. [19_GROUND_RESOURCES_AND_BOOTSTRAP_LOCKS.md](19_GROUND_RESOURCES_AND_BOOTSTRAP_LOCKS.md) — implemented v0.1.2 ground-resource architecture, natural distribution, pickup behavior, and first vanilla progression locks.
+20. [20_PRIMITIVE_KNAPPING.md](20_PRIMITIVE_KNAPPING.md) — primitive knapping operation, held/ground interactions, flint forms/capabilities, and the v0.1.4 transition from instant execution to timed WorkAction.
+21. [21_WORK_ACTION_FOUNDATION.md](21_WORK_ACTION_FOUNDATION.md) — first timed server WorkAction lifecycle, reservations, progress, cancellation, knapping animation/sounds/particles, and multiplayer authority.
+22. [22_FIBRES_CORDAGE_AND_TEXTILES.md](22_FIBRES_CORDAGE_AND_TEXTILES.md) — planned source-identified grass/nettle/bast/flax/hemp fibre, cordage, drying/retting, textile progression, and material-quality direction.
+23. [23_HAND_CRAFTING_UI.md](23_HAND_CRAFTING_UI.md) — v0.1.5 inventory 2x2 Hand Crafting Craft-button UI, server validation/networking, first Wooden Handle operation, and WorkAction integration.
+24. [references/README.md](references/README.md) — Quest Book structural reference and generated early/mid-game UI concepts.
+
 
 ## Recommended Reading Order for a New Handoff
 
@@ -57,11 +65,7 @@ README.md
 
 Do not assume that design depth implies implementation progress. `14_CURRENT_STATE_AND_HANDOFF.md` records the actual current state.
 
-## Working Title
+## Project Name
 
-**Primitive Civilization** is a placeholder working title. The design documents avoid depending on the final name.
+**RealisticCiv** is the current working project/mod name and `realisticciv` is the current implementation ID. The final public-facing name may still change before release; if the mod ID changes after persistent saves/content exist, treat that as a migration concern rather than a cosmetic rename.
 
-
-## Additional Core Design
-
-- [`17_VISUAL_CRAFTING_AND_ANIMATION.md`](17_VISUAL_CRAFTING_AND_ANIMATION.md) — in-world workpieces, reusable animation families, worksite rendering, machine animation, and multiplayer synchronization.

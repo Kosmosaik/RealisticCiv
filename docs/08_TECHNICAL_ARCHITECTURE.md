@@ -1,5 +1,7 @@
 # Technical Architecture
 
+**Implementation note (v0.1.5):** the first operation-definition/catalog layer is implemented under `crafting/operation`, timed execution lives under `crafting/workaction`, and inventory Hand Crafting matching/service now lives under `crafting/handcrafting`. `PrimitiveKnappingService` and the new Hand Crafting UI/service are adapters into the same server-authoritative `WorkActionManager`. The runtime supports one consumed input, one persistent tool capability (held, inventory, or ground depending on operation), optional Ground Resource participation/reservation, stationary cancellation, progress feedback, category-aware work presentation, and fixed outputs. `networking/ModNetworking` registers an empty serverbound Hand Crafting request payload so the server re-resolves the real 2x2 grid rather than trusting client result data. Actor-neutral/settler adapters and richer reservations remain future work.
+
 ## Platform Direction
 
 Recommended initial platform:
@@ -54,6 +56,16 @@ compat/
 client_ui/
 ```
 
+Current bootstrap source paths include:
+
+```text
+crafting/operation/
+crafting/workaction/
+crafting/handcrafting/
+networking/
+client/ui/
+```
+
 ---
 
 ## Registries
@@ -75,6 +87,29 @@ Suggested custom registries/data registries:
 - ResourceTypeRegistry.
 
 Where possible these should load from JSON or other data files rather than requiring Java changes for each content entry.
+
+---
+
+## Material Identity Foundation
+
+Material identity begins at the item/resource level rather than collapsing natural materials into generic gameplay abstractions. The bootstrap implementation provides:
+
+```text
+MaterialDefinition
+├── stable material ID
+├── coarse traits/capabilities
+├── normalized physical/gameplay properties
+└── item → material mapping
+```
+
+Initial examples:
+
+- `realisticciv:granite_stone` → material `realisticciv:granite`, trait `HAMMERSTONE`, high toughness/hardness, poor knappability.
+- `realisticciv:flint_nodule` → material `realisticciv:flint`, trait `KNAPPABLE`, high edge quality/knappability.
+
+Tags such as `realisticciv:hammerstones` and `realisticciv:knappable_stones` are useful coarse selectors, while numeric material properties can later support more nuanced process requirements. Do not introduce a generic `Tool Stone` item.
+
+The v0.1.1 `MaterialCatalog` is a validated bootstrap API. Long-term content should migrate toward validated data definitions without forcing operation callers to change their capability/property-oriented logic. See `18_MATERIAL_IDENTITY_AND_PROPERTIES.md`.
 
 ---
 

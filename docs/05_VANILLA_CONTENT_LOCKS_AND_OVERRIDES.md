@@ -19,6 +19,23 @@ This document defines the main problem areas.
 
 ---
 
+# Implementation Status — v0.1.2
+
+The first technical lock pass is now implemented:
+
+- survival/adventure log breaking is rejected unless the held item is tagged `realisticciv:felling_tools`,
+- the tag is intentionally empty until the first legitimate RealisticCiv axe exists,
+- all standard plank-from-log/stem recipes are disabled,
+- vanilla stick crafting is disabled,
+- crafting table and furnace crafting recipes are disabled,
+- vanilla wooden and stone tool recipes are disabled.
+
+These are server/data-level restrictions, not UI-only hiding. This does **not** complete the vanilla audit: structure loot, villages/trades, mob drops, found workstations, smelting recipes, and later-game bypasses remain outstanding.
+
+See `19_GROUND_RESOURCES_AND_BOOTSTRAP_LOCKS.md` for implementation details and the v0.1.2 test checklist.
+
+---
+
 # Immediate Early-Game Changes
 
 ## Tree Punching
@@ -94,7 +111,7 @@ Vanilla cobblestone tools should not be craftable through normal recipes.
 
 Primitive stone tools should use realistic components such as:
 
-- tool stone,
+- a real knappable material/tool head (for example flint),
 - haft,
 - bindings.
 

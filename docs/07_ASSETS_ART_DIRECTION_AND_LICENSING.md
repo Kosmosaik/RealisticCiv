@@ -246,3 +246,10 @@ Never rely on informal assumptions such as:
 - "it's in a public modpack",
 - "the mod is free",
 - "the repository is public".
+
+
+## Reuse canonical item art for simple Ground Resources
+
+For simple loose world resources, prefer reusing the canonical inventory item texture/model instead of creating a second near-duplicate block texture. The v0.1.2 Ground Resource renderer establishes this pattern for Branch, Granite Stone, and Flint Nodule.
+
+Use bespoke world geometry only when the world object genuinely needs a different silhouette, animation, assembly state, or interaction surface. This reduces asset workload and prevents inventory/world art from drifting apart.

@@ -161,7 +161,7 @@ Internally, nodes may use different completion-condition types, but to the playe
 Examples:
 
 ```text
-Gather Suitable Tool Stone
+Find Flint or Another Knappable Material
 Knapp a Sharp Flake
 Produce Primitive Cordage
 Assemble a Hafted Stone Axe
@@ -181,7 +181,7 @@ Each quest should represent a meaningful new capability, process, concept, or st
 Avoid filler such as:
 
 ```text
-Collect 64 Plant Fibre
+Collect 64 Fibre Items
 Craft 32 Sticks
 Kill 20 Animals
 ```
@@ -645,7 +645,7 @@ Not every progression node should have equal visual weight.
 Represents a smaller enabling step such as:
 
 ```text
-Prepare Fibre
+Prepare Grass / Fibre
 Knapp Stone Flake
 Shape Wooden Haft
 Make Clay Tuyere
@@ -792,7 +792,7 @@ Conceptual chapter definition:
 
 ```json
 {
-  "id": "primitivecivilization:woodworking",
+  "id": "realisticciv:woodworking",
   "title": "Woodworking",
   "description": "...",
   "icon": "...",
@@ -804,18 +804,18 @@ Conceptual quest definition:
 
 ```json
 {
-  "id": "primitivecivilization:stone_axe",
-  "chapter": "primitivecivilization:primitive_tools",
+  "id": "realisticciv:stone_axe",
+  "chapter": "realisticciv:primitive_tools",
   "title": "A Hafted Stone Axe",
   "description": "...",
   "parents": [
-    "primitivecivilization:cordage",
-    "primitivecivilization:stone_axe_head",
-    "primitivecivilization:wooden_haft"
+    "realisticciv:cordage",
+    "realisticciv:stone_axe_head",
+    "realisticciv:wooden_haft"
   ],
   "completion": {
     "type": "operation_completed",
-    "operation": "primitivecivilization:assemble_stone_axe"
+    "operation": "realisticciv:assemble_stone_axe"
   }
 }
 ```
@@ -859,7 +859,8 @@ The first graph can contain only enough quests to guide:
 Ground Resources
 → Knapping
 → Cutting Edge
-→ Plant Fibre
+→ Long Grass / viable fibre source
+→ Prepared Fibre Material
 → Cordage
 → Hafted Stone Axe
 → Timber
@@ -877,3 +878,5 @@ Requirements for the first Quest Book implementation:
 - data-driven chapter/node definitions.
 
 The same framework can then scale to hundreds or thousands of progression nodes without redesigning the fundamental UI model.
+
+The fibre branch must follow the source-identified design in `22_FIBRES_CORDAGE_AND_TEXTILES.md`; the Quest Book should not imply that `Plant Fibre` is a generic naturally harvested resource.
